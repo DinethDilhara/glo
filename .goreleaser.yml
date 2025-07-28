@@ -1,0 +1,9 @@
+# .goreleaser.yml (simplified)
+builds:
+  - main: ./main.go
+    goos: [darwin, linux, windows]
+    goarch: [amd64]
+    binary: glo
+archives:
+  - format: tar.gz
+    name_template: "{{ .Project }}_{{ .Os }}_{{ .Arch }}"
