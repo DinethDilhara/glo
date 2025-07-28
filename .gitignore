@@ -1,0 +1,46 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+glo
+
+# Output folders
+/release/
+/build/
+
+# OS and Editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Dependency directories
+vendor/
+
+# Go coverage / test output
+*.out
+*.test
+
+# Temporary files
+*.tmp
+*.swp
+
+# GoReleaser output
+dist/
+
+# Ignore Homebrew formula if generated here
+Formula/
+
+# Autocomplete scripts (optional if generated)
+completions/
+
+# Local environment config (if used)
+.env
