@@ -1,9 +1,104 @@
-# .goreleaser.yml (simplified)
+version: 1
+
+project_name: glo
+
 builds:
   - main: ./main.go
-    goos: [darwin, linux, windows]
-    goarch: [amd64]
+    id: glo
     binary: glo
+    goos: [darwin, linux, windows]
+    goarch: [amd64, arm64]
+    goarm: [6, 7]
+    ignore:
+      - goos: windows
+        goarch: arm64
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.Date}}
+
 archives:
-  - format: tar.gz
-    name_template: "{{ .Project }}_{{ .Os }}_{{ .Arch }}"
+  - id: default
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE
+      - completions/*
+
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
+  algorithm: sha256
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - "^build:"
+      - "^style:"
+      - "^refactor:"
+  groups:
+    - title: Features
+      regexp: "^.*feat[(\\w)]*:+.*$"
+      order: 0
+    - title: Bug Fixes
+      regexp: "^.*fix[(\\w)]*:+.*$"
+      order: 1
+    - title: Others
+      order: 999
+
+release:
+  github:
+    owner: DinethDilhara
+    name: glo
+  draft: false
+  prerelease: auto
+  mode: replace
+  header: |
+    ## 🚀 What's New in {{ .Tag }}
+
+    Welcome to the latest release of **glo** - your powerful Git history explorer!
+  footer: |
+    ## 📦 Installation
+
+    ### Using curl (Linux/macOS)
+    ```bash
+    curl -L https://github.com/DinethDilhara/glo/releases/download/{{ .Tag }}/glo_{{ .Version }}_Linux_x86_64.tar.gz | tar xz
+    ```
+
+    ### Using PowerShell (Windows)
+    ```powershell
+    Invoke-WebRequest -Uri "https://github.com/DinethDilhara/glo/releases/download/{{ .Tag }}/glo_{{ .Version }}_Windows_x86_64.zip" -OutFile "glo.zip"
+    Expand-Archive glo.zip
+    ```
+
+    ---
+
+    **Full Changelog**: https://github.com/DinethDilhara/glo/compare/{{ .PreviousTag }}...{{ .Tag }}
+
+brews:
+  - name: glo
+    homepage: https://github.com/DinethDilhara/glo
+    description: "A CLI tool to explore Git history with style"
+    license: MIT
+    repository:
+      owner: DinethDilhara
+      name: homebrew-tap
+    folder: Formula
+    test: |
+      system "#{bin}/glo --help"
