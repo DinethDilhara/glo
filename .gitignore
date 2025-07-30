@@ -5,6 +5,7 @@
 *.so
 *.dylib
 glo
+glo-test
 
 # Output folders
 /release/
@@ -38,9 +39,6 @@ dist/
 
 # Ignore Homebrew formula if generated here
 Formula/
-
-# Autocomplete scripts (optional if generated)
-completions/
 
 # Local environment config (if used)
 .env
