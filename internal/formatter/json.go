@@ -70,3 +70,20 @@ func (jf *JSONFormatter) FormatSummary(commits []models.Commit, metadata map[str
 	
 	return string(data)
 }
+
+func (jf *JSONFormatter) FormatBranches(branches []models.Branch) string {
+	var data []byte
+	var err error
+	
+	if jf.Indent {
+		data, err = json.MarshalIndent(branches, "", "  ")
+	} else {
+		data, err = json.Marshal(branches)
+	}
+	
+	if err != nil {
+		return "[]"
+	}
+	
+	return string(data)
+}
