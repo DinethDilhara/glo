@@ -1,0 +1,93 @@
+# .golangci.yml
+# Configuration for golangci-lint
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters-settings:
+  govet:
+    check-shadowing: true
+  golint:
+    min-confidence: 0
+  gocyclo:
+    min-complexity: 10
+  maligned:
+    suggest-new: true
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  misspell:
+    locale: US
+  lll:
+    line-length: 120
+  goimports:
+    local-prefixes: github.com/DinethDilhara/glo
+  gocritic:
+    enabled-tags:
+      - performance
+      - style
+      - experimental
+    disabled-checks:
+      - wrapperFunc
+      - dupImport
+  funlen:
+    lines: 100
+    statements: 50
+
+linters:
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - funlen
+    - gochecknoinits
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - golint
+    - gomnd
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - interfacer
+    - lll
+    - misspell
+    - nakedret
+    - noctx
+    - nolintlint
+    - rowserrcheck
+    - scopelint
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+  disable:
+    - maligned
+    - prealloc
+
+issues:
+  exclude-rules:
+    - path: cmd/
+      linters:
+        - lll
+  exclude-use-default: false
+  exclude:
+    - exported func .* returns unexported type .*, which can be annoying to use
+    - (comment on exported (method|function|type|const|var)|should have( a package)? comment|comment should be of the form)
+    - should have a package comment
+    - don't use an underscore in package name
