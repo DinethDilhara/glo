@@ -18,9 +18,9 @@ builds:
       - -trimpath
     ldflags:
       - -s -w
-      - -X main.version={{.Version}}
-      - -X main.commit={{.Commit}}
-      - -X main.date={{.Date}}
+      - -X github.com/DinethDilhara/glo/cmd.version={{.Version}}
+      - -X github.com/DinethDilhara/glo/cmd.commit={{.Commit}}
+      - -X github.com/DinethDilhara/glo/cmd.date={{.Date}}
 
 archives:
   - id: default
@@ -70,11 +70,16 @@ release:
   prerelease: auto
   mode: replace
   header: |
-    ## 🚀 What's New in {{ .Tag }}
+    ## Changes in {{.Tag}}
 
-    Welcome to the latest release of **glo** - your powerful Git history explorer!
+    This release includes improvements and bug fixes for the glo CLI tool.
   footer: |
-    ## 📦 Installation
+    ## Installation
+
+    ### Using Homebrew
+    ```bash
+    brew install dinethdhilhara/tap/glo
+    ```
 
     ### Using curl (Linux/macOS)
     ```bash
@@ -86,8 +91,6 @@ release:
     Invoke-WebRequest -Uri "https://github.com/DinethDilhara/glo/releases/download/{{ .Tag }}/glo_{{ .Version }}_Windows_x86_64.zip" -OutFile "glo.zip"
     Expand-Archive glo.zip
     ```
-
-    ---
 
     **Full Changelog**: https://github.com/DinethDilhara/glo/compare/{{ .PreviousTag }}...{{ .Tag }}
 
@@ -101,4 +104,4 @@ brews:
       name: homebrew-tap
     folder: Formula
     test: |
-      system "#{bin}/glo --help"
+      system "#{bin}/glo --version"
