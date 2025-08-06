@@ -35,6 +35,7 @@ Examples:
   glo log --since="2024-01-01"         # Show commits since date
   glo log --format=json                # Export as JSON
   glo log --format=markdown            # Export as Markdown`,
+	Version: version,
 }
 
 
@@ -60,5 +61,5 @@ func init() {
 	rootCmd.AddCommand(versionCmd)
 	
 	rootCmd.PersistentFlags().StringP("format", "f", "color", "Output format: color, json, markdown")
-	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "Enable verbose output")
+	rootCmd.PersistentFlags().Bool("verbose", false, "Enable verbose output")
 }
