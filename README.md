@@ -48,13 +48,24 @@ Download the latest binary from [GitHub Releases](https://github.com/DinethDilha
 | **macOS**   | Apple Silicon | [glo_Darwin_arm64.tar.gz](https://github.com/DinethDilhara/glo/releases/latest/download/glo_Darwin_arm64.tar.gz)   |
 | **Windows** | x86_64        | [glo_Windows_x86_64.zip](https://github.com/DinethDilhara/glo/releases/latest/download/glo_Windows_x86_64.zip)     |
 
+## Installation
+
+### Homebrew (Recommended)
+
+```bash
+brew install dinethdhilhara/tap/glo
+```
+
+### Download Binary
+
+Download the latest binary from [GitHub Releases](https://github.com/DinethDilhara/glo/releases).
+
 ### From Source
 
 ```bash
 git clone https://github.com/DinethDilhara/glo.git
 cd glo
 go build -o glo .
-sudo mv glo /usr/local/bin/  # Optional: add to PATH
 ```
 
 ### Homebrew (Coming Soon)
