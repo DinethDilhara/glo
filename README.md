@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/DinethDilhara/glo/assets/your-username/your-image.png" alt="glo - Clean view for dirty git commands" width="800">
+  <img src="https://github.com/DinethDilhara/glo/blob/main/assets/glo-readme-banner.png" alt="glo - Clean view for dirty git commands" width="800">
 </p>
 
 <h1 align="center">~ glo</h1>
